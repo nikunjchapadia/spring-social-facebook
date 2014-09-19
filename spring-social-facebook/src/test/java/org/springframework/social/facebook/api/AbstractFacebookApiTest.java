@@ -32,7 +32,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AbstractFacebookApiTest {
-	protected static final String ACCESS_TOKEN = "CAAUsYG6fa4MBAIqKVW7FJk6NNqXSEfYoHY4OuEcwsLQEZAhtWgjnUlAH7aGQVh710zv2uO0e4UYge2rJ0O7r8HBSdWQqG8TXX42mpUuiE7ZB0RZCrAENZCm9BOCfbSEMq1ZB2zRTRDiCbc1APa9TZAtoWki5IjXvsrWObZAeG11AGI67fSJnQkgao7kqWEazR17mjARbRH32LEkOKukZBFKJ";
+
+	protected static final String ACCESS_TOKEN = "CAAUsYG6fa4MBAA3LdT22Bc5yq0bVWrwhFmFKZBlDZA1cAefamSMIXLAxE8YPA7RiLI4ejsgBvt8xG63JL7m1TEWGNr4XwVBkSXeQwIaWte0S8mX9NkUtp2PFy0yYyUmsFkBWccXZCNagyMPAHW3uR5P1EepF4pmvmm3jEAAP1z1QhhGIN37kQkCCTU4zMgeoBZAtP4i2smPas40njDbJ";
 	protected static final String APP_ACCESS_TOKEN = "8d3092f3760f630f660610e84e8a21be";
 
 	protected FacebookTemplate facebook;

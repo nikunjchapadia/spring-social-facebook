@@ -25,7 +25,7 @@ import java.util.Date;
 public class Album extends FacebookObject {
 
 	private String id;
-	
+
 	private boolean canUpload;
 
 	private int count;
