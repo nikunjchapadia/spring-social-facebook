@@ -32,7 +32,6 @@ public interface AchievementOperations {
 
 	void removeAchievement(String achievementUrl);
 
-	
 	List<AchievementType> getAchievementTypes();
 	
 	AchievementType getAchievementType(String achievementTypeId);

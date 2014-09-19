@@ -15,21 +15,25 @@
  */
 package org.springframework.social.facebook.api;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class AbstractFacebookApiTest {
-	protected static final String ACCESS_TOKEN = "someAccessToken";
-	protected static final String APP_ACCESS_TOKEN = "123456|abcdefg987654321";
+	protected static final String ACCESS_TOKEN = "CAAUsYG6fa4MBAIqKVW7FJk6NNqXSEfYoHY4OuEcwsLQEZAhtWgjnUlAH7aGQVh710zv2uO0e4UYge2rJ0O7r8HBSdWQqG8TXX42mpUuiE7ZB0RZCrAENZCm9BOCfbSEMq1ZB2zRTRDiCbc1APa9TZAtoWki5IjXvsrWObZAeG11AGI67fSJnQkgao7kqWEazR17mjARbRH32LEkOKukZBFKJ";
+	protected static final String APP_ACCESS_TOKEN = "8d3092f3760f630f660610e84e8a21be";
 
 	protected FacebookTemplate facebook;
 	protected FacebookTemplate unauthorizedFacebook;
@@ -38,6 +42,7 @@ public class AbstractFacebookApiTest {
 	protected MockRestServiceServer unauthorizedMockServer;
 	protected MockRestServiceServer appFacebookMockServer;
 
+    private ObjectMapper objectMapper;
 	@Before
 	public void setup() {
 		facebook = createFacebookTemplate();
@@ -48,6 +53,8 @@ public class AbstractFacebookApiTest {
 		
 		appFacebook = new FacebookTemplate(APP_ACCESS_TOKEN);
 		appFacebookMockServer = MockRestServiceServer.createServer(appFacebook.getRestTemplate());
+
+        objectMapper = facebook.getObjectMapper();
 	}
 
 	protected FacebookTemplate createFacebookTemplate() {
@@ -67,5 +74,16 @@ public class AbstractFacebookApiTest {
 	}
 
 	private static final DateFormat FB_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+
+    public void assertPrintable(Object object) throws IOException {
+        Assert.assertNotNull(object);
+        StringWriter sw = new StringWriter();
+        objectMapper.writeValue(sw, object);
+        sw.close();
+        System.out.println("--------------------------------------------------");
+        System.out.println(object.getClass().getCanonicalName() + ":");
+        System.out.println(sw.getBuffer().toString());
+        System.out.println("--------------------------------------------------");
+    }
 
 }

@@ -15,25 +15,30 @@
  */
 package org.springframework.social.facebook.api;
 
-import static org.junit.Assert.*;
-import static org.springframework.http.HttpMethod.*;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
-
-import java.util.List;
-import java.util.Locale;
-
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.social.NotAuthorizedException;
 
+import java.util.List;
+import java.util.Locale;
+
+import static org.junit.Assert.*;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+
 /**
  * @author Craig Walls
  */
 public class UserTemplateTest extends AbstractFacebookApiTest {
-	
-	@Test
+
+    @Test
+    public void getUserProfile() {
+        System.out.println(facebook.userOperations().getUserProfile());
+    }
+
+    @Test
 	public void getUserProfile_currentUser() {
 		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/me"))
 				.andExpect(method(GET))
@@ -275,8 +280,11 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
-	public void search_unauthorized() {
-		unauthorizedFacebook.userOperations().search("Michael Scott");
+	public void search_unauthorized() throws Exception{
+        PagedList<Reference> list = unauthorizedFacebook.userOperations().search("Michael Scott");
+        assertPrintable(list);
+        System.out.println("No fun yet");
+		System.out.println(list);
 	}
 	
 	private void assertBasicProfileData(FacebookProfile profile, boolean withMiddleName) {

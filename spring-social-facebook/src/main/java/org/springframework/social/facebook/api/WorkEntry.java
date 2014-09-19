@@ -18,7 +18,6 @@ package org.springframework.social.facebook.api;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * Model class representing an entry in the user's work history.
  * @author Craig Walls

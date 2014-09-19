@@ -105,8 +105,7 @@ public class AchievementType extends FacebookObject {
 		return isScraped;
 	}
 
-	
-	
+
 	public static class Image {
 		
 		private final String url;
